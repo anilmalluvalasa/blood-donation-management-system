@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Donor</title>
+
+    <style>
+        body{
+            background-color:#f4f6f8;
+            font-family: Arial;
+            margin:0;
+        }
+
+        /* HEADER */
+        .header{
+            background-color:darkred;
+            padding:15px;
+            text-align:center;
+        }
+
+        .header a{
+            color:white;
+            margin:20px;
+            text-decoration:none;
+            font-size:18px;
+        }
+
+        .header a:hover{
+            color:gold;
+        }
+
+        /* TITLE */
+        h2{
+            text-align:center;
+            color:crimson;
+            margin-top:20px;
+        }
+
+        /* FORM */
+        .form-box{
+            text-align:center;
+            margin-top:20px;
+        }
+
+        select{
+            padding:8px;
+            width:180px;
+        }
+
+        .btn{
+            margin-top:10px;
+            padding:8px 15px;
+            background-color:darkred;
+            color:white;
+            border:none;
+            border-radius:5px;
+        }
+
+        .btn:hover{
+            background-color:crimson;
+        }
+
+        /* CARDS */
+        .card{
+            display:inline-block;
+            width:250px;
+            margin:15px;
+            padding:15px;
+            border:1px solid #ccc;
+            border-radius:10px;
+            background-color:white;
+            text-align:center;
+        }
+
+        .card h3{
+            color:crimson;
+        }
+
+        .view-btn{
+            margin-top:10px;
+            padding:7px 15px;
+            background-color:green;
+            color:white;
+            border:none;
+            border-radius:5px;
+        }
+
+        .view-btn:hover{
+            background-color:darkgreen;
+        }
+
+        .msg{
+            text-align:center;
+            color:red;
+            margin-top:10px;
+        }
+        .forms{
+         display:inline-block;;
+
+
+
+
+        }
+    </style>
+</head>
+
+<body>
+
+
+<div class="header">
+    <a href="{% url 'blood' %}">Home</a>
+    <a href="{% url 'dreg' %}">Register</a>
+    <a href="{% url 'dlogin' %}">Login</a>
+    <a href="{% url 'searchdonar1' %}">Search</a>
+</div>
+
+<h2>Search Donor</h2>
+
+<!-- SEARCH FORM -->
+<div class="form-box">
+<form action="{% url 'searchdonar1' %}" method="post">
+    {% csrf_token %}
+
+    <label><b>Select Blood Group:</b></label><br><br>
+
+    <select name="bgroup" required>
+        <option disabled selected>------Select------</option>
+        <option>A Positive</option>
+        <option>A Negative</option>
+        <option>B Positive</option>
+        <option>B Negative</option>
+        <option>AB Positive</option>
+        <option>AB Negative</option>
+        <option>O Positive</option>
+        <option>O Negative</option>
+    </select>
+
+    <br>
+    <input type="submit" value="Search" class="btn">
+</form>
+</div>
+
+<h4 class="msg">{{ msg1 }}</h4>
+
+<!-- DONOR CARDS -->
+<div style="text-align:center">
+
+{% for i in res1 %}
+
+<div class="card">
+
+    <h3>{{ i.dname }}</h3>
+
+    <p><b>Blood Group:</b> {{ i.bloodgroup }}</p>
+    <p><b>Age:</b> {{ i.age }}</p>
+    <p><b>City:</b> {{ i.city }}</p>
+    <p><b>State:</b> {{ i.state }}</p>
+
+
+
+    <p>Status:
+    {% if i.availability == "Available" %}
+        <span style="color:green;">Available</span>
+    {% else %}
+        <span style="color:red;">Not Available</span>
+    {% endif %}
+</p>
+
+    <form method="post" action="{% url 'request' %}" class="forms">
+        {% csrf_token %}
+
+        <input type="hidden" name="did" value="{{ i.did }}">
+        <input type="submit" value="View Details" class="view-btn">
+    </form>
+
+
+    <form method="post" action="{% url 'donate_blood' %}" class="forms">
+        {% csrf_token %}
+
+        <input type="hidden" name="did" value="{{ i.did }}">
+    <button type="submit" style="background-color:red; color:white; border:none; padding:5px; border-radius:5px;">
+        I Donated Blood
+    </button>
+
+
+<!--        <input type="hidden" name="did" value="{{ i.did }}">-->
+<!--        <input type="submit" value="View Details" class="view-btn">-->
+    </form>
+
+</div>
+
+{% endfor %}
+
+</div>
+<h4 align="center" style="color:red">{{msg}}</h4>
+</body>
+</html>

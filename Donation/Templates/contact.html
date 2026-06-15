@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Donor Details</title>
+
+    <style>
+        body {
+            background: linear-gradient(to right, #f5f7fa, #c3cfe2);
+            font-family: Arial, sans-serif;
+        }
+
+        .card {
+            width: 400px;
+            margin: 100px auto;
+            padding: 20px;
+            border-radius: 12px;
+            background-color: white;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        h2 {
+            color: crimson;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            font-size: 18px;
+        }
+
+        td {
+            padding: 10px;
+        }
+
+        td:first-child {
+            font-weight: bold;
+            color: #333;
+        }
+
+        td:last-child {
+            color: #555;
+        }
+
+        .btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: crimson;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: darkred;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="card">
+    <h2>Donor Details</h2>
+
+    <table>
+        <tr>
+            <td>Name:</td><td>{{ res.dname }}</td>
+        </tr>
+        <tr>
+            <td>Phone:</td><td>{{ res.phno }}</td>
+        </tr>
+        <tr>
+            <td>City:</td><td>{{ res.city }}</td>
+        </tr>
+        <tr>
+            <td>Blood Group:</td><td>{{ res.bloodgroup }}</td>
+        </tr>
+    </table>
+
+    <!-- Optional button -->
+    <a href="tel:{{ res.phno }}">
+        <button class="btn">📞 Call Now</button>
+    </a>
+
+</div>
+
+</body>
+</html>

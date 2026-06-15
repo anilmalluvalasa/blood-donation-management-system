@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Register</title>
+
+<style>
+    body{
+        margin:0;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(to right, #eef2f3, #dfe9f3);
+    }
+
+
+    header{
+        background-color: crimson;
+        padding: 15px;
+        text-align: center;
+        color: white;
+        font-size: 28px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    }
+
+    header a{
+        float:right;
+        margin-right:20px;
+        color:white;
+        text-decoration:none;
+        font-size:18px;
+    }
+
+    header a:hover{
+        color: gold;
+    }
+
+
+    .card{
+        width: 450px;
+        margin: 40px auto;
+        background: white;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+
+    h2{
+        text-align:center;
+        color: crimson;
+        margin-bottom: 20px;
+    }
+
+    label{
+        font-weight: bold;
+    }
+
+    input, select{
+        width:100%;
+        padding:10px;
+        margin-top:5px;
+        margin-bottom:15px;
+        border-radius:6px;
+        border:1px solid #ccc;
+    }
+
+    input:focus, select:focus{
+        border-color: crimson;
+        outline:none;
+    }
+
+   .radio-group {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-top:10px;
+}
+    .btn{
+        width:100%;
+        padding:12px;
+        background: crimson;
+        color:white;
+        border:none;
+        border-radius:6px;
+        font-size:18px;
+        cursor:pointer;
+    }
+
+    .btn:hover{
+        background: darkred;
+    }
+
+    .msg{
+        text-align:center;
+        color:green;
+        margin-top:10px;
+    }
+
+    .header{
+            background-color:darkred;
+            padding:15px;
+            text-align:center;
+        }
+
+        .header a{
+            color:white;
+            margin:20px;
+            text-decoration:none;
+            font-size:18px;
+        }
+
+        .header a:hover{
+            color:gold;
+        }
+
+
+</style>
+
+</head>
+
+<body>
+
+
+   <div class="header">
+    <a href="{% url 'blood' %}">Home</a>
+    <a href="{% url 'dreg' %}">Register</a>
+    <a href="{% url 'dlogin' %}">Login</a>
+    <a href="{% url 'searchdonar1' %}">Search</a>
+</div>
+
+
+<div class="card">
+
+<h2>Donor Registration</h2>
+
+<h4 class="msg">{{ msg }}</h4>
+
+<form action="{% url 'dreg' %}" method="post">
+{% csrf_token %}
+
+<label>Donor ID</label>
+<input type="number" name="did" required>
+
+<label>Name</label>
+<input type="text" name="dname" required>
+
+<label>Password</label>
+<input type="password" name="pwd" required>
+
+<label>Gender</label>
+<div class="radio-group">
+    <input type="radio" name="gender" value="m"> Male
+    <input type="radio" name="gender" value="f"> Female
+    <input type="radio" name="gender" value="o"> Other
+</div>
+
+<label>Age</label>
+<input type="text" name="age">
+
+<label>Phone Number</label>
+<input type="text" name="phno" required>
+
+<label>Email</label>
+<input type="email" name="email" required>
+
+<label>Blood Group</label>
+<select name="bg" required>
+    <option disabled selected>Select</option>
+    <option>A Positive</option>
+    <option>A Negative</option>
+    <option>B Positive</option>
+    <option>B Negative</option>
+    <option>AB Positive</option>
+    <option>AB Negative</option>
+    <option>O Positive</option>
+    <option>O Negative</option>
+</select>
+
+<label>State</label>
+<input type="text" name="state" required>
+
+<label>City</label>
+<input type="text" name="city" required>
+
+<button type="submit" class="btn">Register</button>
+
+</form>
+
+</div>
+
+</body>
+</html>

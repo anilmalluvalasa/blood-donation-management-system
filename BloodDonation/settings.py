@@ -55,7 +55,7 @@ ROOT_URLCONF = "BloodDonation.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [BASE_DIR / "Donation" / "Templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
